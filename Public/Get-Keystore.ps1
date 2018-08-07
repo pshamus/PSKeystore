@@ -15,7 +15,7 @@ function Get-Keystore {
 
 		$keystores = [System.Collections.ArrayList]::new()
 		$null = $keystores.Add([Keystore]::new('CurrentDirectory', (Get-Location).Path, 'BuiltIn', ($Script:Settings.DefaultKeystore -eq 'CurrentDirectory')))
-		$null = $keystores.Add([Keystore]::new('Self', "$Env:USERPROFILE\Documents\Keystore", 'BuiltIn', ($Script:Settings.DefaultKeystore -eq 'Self')))
+		$null = $keystores.Add([Keystore]::new('Self', $Script:SelfKeystorePath, 'BuiltIn', ($Script:Settings.DefaultKeystore -eq 'Self')))
 		$Script:Settings.Keystores.GetEnumerator().ForEach({
 			$null = $keystores.Add([Keystore]::new($_.Name, $_.Value, 'Custom', ($_.Name -eq $Script:Settings.DefaultKeystore)))
 		})

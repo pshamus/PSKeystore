@@ -9,11 +9,6 @@
 
 Set-StrictMode -Version Latest
 
-# Ensure the module configuration path is accessible.
-if (!(Test-Path -Path (Get-ConfigurationPath))) {
-	$null = New-Item -Path (Get-ConfigurationPath) -ItemType Directory -Force
-}
-
 # Check if the Json.NET and Json.NET Schema libraries are loaded.
 $isJsonLoaded = $null -ne ([System.Management.Automation.PSTypeName]'Newtonsoft.Json.Linq.JObject').Type
 $isJsonSchemaLoaded = $null -ne ([System.Management.Automation.PSTypeName]'Newtonsoft.Json.Schema.JSchema').Type
@@ -43,8 +38,10 @@ foreach ($import in @($Public + $Private)) {
 Export-ModuleMember -Function $Public.BaseName
 
 $Script:IndividualCertificateName = 'Keystore Individual Certificate'
+$Script:SelfKeystorePath = "$Env:USERPROFILE\Documents\Keystore"
 
 try {
+	# Ensure the module configuration path is accessible.
 	if (!(Test-Path -Path (Get-ConfigurationPath))) {
 		$null = New-Item -Path (Get-ConfigurationPath) -ItemType Directory -Force
 	}
@@ -53,6 +50,11 @@ try {
 
 	if ($null -eq (GetKeystoreIndividualCertificate)) {
 		NewKeystoreIndividualCertificate
+	}
+
+	# Create the Self keystore if it doesn't exist.
+	if (!(Test-Path -Path $Script:SelfKeystorePath -PathType Container)) {
+		$null = New-Item -Path $Script:SelfKeystorePath -ItemType Directory -Force
 	}
 
 	$Script:KeystoreItemSchema = [Newtonsoft.Json.Schema.JSchema]::Parse((Get-Content -Path "$PSScriptRoot\keystore_item.schema.json"))

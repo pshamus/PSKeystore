@@ -1,7 +1,7 @@
 function New-KeystoreItem {
 	#.ExternalHelp Keystore.psm1-Help.xml
 	[CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'GenericSecretAndStore')]
-	[OutputType('KeystoreItem')]
+	[OutputType([KeystoreItem])]
 	param(
 		[Parameter(Mandatory)]
 		[ValidateNotNullOrEmpty()]
@@ -45,16 +45,16 @@ function New-KeystoreItem {
 
 		if ($PSCmdlet.ParameterSetName -like '*Store') {
 			if ($PSBoundParameters.ContainsKey('StoreName')) {
-				if ($null -eq ($keystore = Get-Keystore -Name $StoreName)) {
-					throw "The keystore '$StoreName' does not exist."
+				if ($null -eq ($keystore = Get-KeystoreStore -Name $StoreName)) {
+					throw "The store '$StoreName' does not exist."
 				}
 			} else {
-				$keystore = Get-KeystoreDefaultKeystore
+				$keystore = Get-KeystoreDefaultStore
 			}
 			$keystore.Validate()
 			$Path = $keystore.Path
 		}
-		Write-Verbose "Using keystore: $($keystore.Name)"
+		Write-Verbose "Using store: $($keystore.Name)"
 
 		if ($PSBoundParameters.ContainsKey('AccessGroup')) {
 			if ($null -eq ($keystoreAccessGroup = Get-KeystoreAccessGroup -Name $AccessGroup)) {

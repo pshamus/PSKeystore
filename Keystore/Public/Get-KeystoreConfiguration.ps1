@@ -1,7 +1,7 @@
-function Get-KeystoreDefaultKeystore {
+function Get-KeystoreConfiguration {
 	#.ExternalHelp Keystore.psm1-Help.xml
 	[CmdletBinding()]
-	[OutputType('KeystoreAccessGroup')]
+	[OutputType([hashtable])]
 	param ()
 
 	Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState
@@ -9,7 +9,7 @@ function Get-KeystoreDefaultKeystore {
 	try {
 		$ErrorActionPreference = 'Stop'
 
-		Get-Keystore -Name $Script:Settings.DefaultKeystore
+		Import-Configuration
 	} catch {
 		$PSCmdlet.ThrowTerminatingError($_)
 	} finally {

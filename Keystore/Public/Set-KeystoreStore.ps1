@@ -1,22 +1,18 @@
-function Set-Keystore {
+function Set-KeystoreStore {
 	#.ExternalHelp Keystore.psm1-Help.xml
 	[CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'ByName')]
-	[OutputType('Keystore')]
+	[OutputType([KeystoreStore])]
 	param (
 		[Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'ByName')]
 		[ValidateNotNullOrEmpty()]
 		[string]$Name,
 
 		[Parameter(Mandatory, ValueFromPipeline, ParameterSetName = 'ByObject')]
-		[Keystore]$InputObject,
+		[KeystoreStore]$InputObject,
 
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
 		[string]$Path = (Get-Location),
-
-		[Parameter()]
-		[ValidateNotNullOrEmpty()]
-		[bool]$IsDefault = $false,
 
 		[Parameter()]
 		[switch]$PassThru
@@ -42,10 +38,10 @@ function Set-Keystore {
 
 			$newItem = $false
 			if ($PSCmdlet.ParameterSetName -eq 'ByName') {
-				if ($null -eq ($keystore = Get-Keystore -Name $Name)) {
+				if ($null -eq ($keystore = Get-KeystoreStore -Name $Name)) {
 					$newItem = $true
 					# Create a brand new keystore.
-					$keystore = [Keystore]::new($Name, $Path, 'Custom', $IsDefault)
+					$keystore = [KeystoreStore]::new($Name, $Path, 'Custom', $false)
 				}
 			}
 
@@ -55,10 +51,6 @@ function Set-Keystore {
 					$updateNeeded = $true
 					$keystore.Path = $Path
 				}
-				if ($PSBoundParameters.ContainsKey('IsDefault')) {
-					$updateNeeded = $true
-					$keystore.IsDefault = $IsDefault
-				}
 			}
 
 			$keystore.Validate()
@@ -67,14 +59,7 @@ function Set-Keystore {
 				$target = "Keystore '$Name' ($($keystore.Path))"
 				if ($PSCmdlet.ShouldProcess($target, 'Set')) {
 					if ($keystore.Type -ne 'BuiltIn' -and $PSBoundParameters.ContainsKey('Path')) {
-						$Settings.Keystores[$Name] = $Path
-					}
-					if ($PSBoundParameters.ContainsKey('IsDefault')) {
-						if ($IsDefault) {
-							$Settings.DefaultKeystore = $Name
-						} else {
-							$Settings.DefaultKeystore = 'Self'
-						}
+						$Settings.Stores[$Name] = $Path
 					}
 					$Settings | Export-Configuration
 					if ($PassThru.IsPresent) {

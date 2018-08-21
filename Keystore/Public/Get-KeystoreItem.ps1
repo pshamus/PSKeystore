@@ -1,7 +1,7 @@
 function Get-KeystoreItem {
 	#.ExternalHelp Keystore.psm1-Help.xml
 	[CmdletBinding(DefaultParameterSetName = 'ByStore')]
-	[OutputType('KeystoreItem')]
+	[OutputType([KeystoreItem])]
 	param (
 		[Parameter(ParameterSetName = 'ByStore', Position = 1)]
 		[Parameter(ParameterSetName = 'ByPath', Position = 1)]
@@ -25,14 +25,14 @@ function Get-KeystoreItem {
 
 		if ($PSCmdlet.ParameterSetName -eq 'ByStore') {
 			if ($PSBoundParameters.ContainsKey('StoreName')) {
-				if ($null -eq ($keystore = Get-Keystore -Name $StoreName)) {
-					throw "The keystore '$StoreName' does not exist."
+				if ($null -eq ($store = Get-KeystoreStore -Name $StoreName)) {
+					throw "The store '$StoreName' does not exist."
 				}
 			} else {
-				$keystore = Get-KeystoreDefaultKeystore
+				$store = Get-KeystoreDefaultStore
 			}
-			$keystore.Validate()
-			$Path = $keystore.Path
+			$store.Validate()
+			$Path = $store.Path
 		}
 
 		$resolvedPath = Resolve-Path -Path $Path

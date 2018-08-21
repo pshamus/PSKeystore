@@ -1,4 +1,4 @@
-function Set-KeystoreDefaultKeystore {
+function Set-KeystoreDefaultStore {
 	#.ExternalHelp Keystore.psm1-Help.xml
 	[CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'ByName')]
 	param (
@@ -7,7 +7,7 @@ function Set-KeystoreDefaultKeystore {
 		[string]$Name,
 
 		[Parameter(Mandatory, ValueFromPipeline, ParameterSetName = 'ByObject')]
-		[Keystore]$Keystore
+		[KeystoreStore]$Store
 	)
 
 	begin {
@@ -18,20 +18,20 @@ function Set-KeystoreDefaultKeystore {
 	process {
 		try {
 			if ($PSCmdlet.ParameterSetName -eq 'ByObject') {
-				$Name = $Keystore.Name
+				$Name = $Store.Name
 			} else {
-				if ($null -eq ($Keystore = Get-Keystore -Name $Name)) {
+				if ($null -eq ($Store = Get-KeystoreStore -Name $Name)) {
 					throw "The keystore '$Name' does not exist."
 				}
 			}
 
-			if ($Script:Settings.DefaultKeystore -eq $Keystore.Name) {
+			if ($Script:Settings.DefaultStore -eq $Store.Name) {
 				Write-Verbose "The keystore '$Name' is already set as the default."
 			} else {
-				$target = "Keystore '$($Keystore.Name)' ($($Keystore.Path))"
+				$target = "Keystore '$($Store.Name)' ($($Store.Path))"
 				if ($PSCmdlet.ShouldProcess($target, 'Set as default')) {
 					$Script:Settings = Get-KeystoreConfiguration
-					$Script:Settings.DefaultKeystore = $Keystore.Name
+					$Script:Settings.DefaultStore = $Store.Name
 					$Script:Settings | Export-Configuration
 				}
 			}

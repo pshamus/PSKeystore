@@ -1,7 +1,7 @@
 function Set-KeystoreAccessGroup {
 	#.ExternalHelp Keystore.psm1-Help.xml
 	[CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'ByName')]
-	[OutputType('KeystoreAccessGroup')]
+	[OutputType([KeystoreAccessGroup])]
 	param (
 		[Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'ByName')]
 		[ValidateNotNullOrEmpty()]

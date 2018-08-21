@@ -1,7 +1,7 @@
-function Get-KeystoreDefaultAccessGroup {
+function Get-KeystoreDefaultStore {
 	#.ExternalHelp Keystore.psm1-Help.xml
 	[CmdletBinding()]
-	[OutputType('KeystoreAccessGroup')]
+	[OutputType([KeystoreStore])]
 	param ()
 
 	Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState
@@ -9,7 +9,7 @@ function Get-KeystoreDefaultAccessGroup {
 	try {
 		$ErrorActionPreference = 'Stop'
 
-		Get-KeystoreAccessGroup -Name $Script:Settings.DefaultAccessGroup
+		Get-KeystoreStore -Name $Script:Settings.DefaultStore
 	} catch {
 		$PSCmdlet.ThrowTerminatingError($_)
 	} finally {

@@ -1,9 +1,14 @@
+enum KeystoreSettingScope {
+	CurrentUser
+	LocalMachine
+}
+
 enum KeystoreSettingType {
 	BuiltIn
 	Custom
 }
 
-class Keystore {
+class KeystoreStore {
 	[ValidateNotNullOrEmpty()]
 	[string]$Name
 
@@ -14,7 +19,7 @@ class Keystore {
 
 	[bool]$IsDefault
 
-	Keystore([string]$name, [string]$path, [KeystoreSettingType]$type, [bool]$isDefault) {
+	KeystoreStore([string]$name, [string]$path, [KeystoreSettingType]$type, [bool]$isDefault) {
 		$this.Name = $name
 		$this.Path = $path
 		$this.Type = $type
@@ -24,10 +29,10 @@ class Keystore {
 	[void]Validate() {
 		if (Test-Path -Path $this.Path) {
 			if (!(Test-Path -Path $this.Path -PathType Container)) {
-				throw "Invalid keystore path '$($this.Path)'. A keystore path must be a directory."
+				throw "Invalid store path '$($this.Path)'. A store path must be a directory."
 			}
 		} else {
-			throw "The keystore path '$($this.Path)' does not exist or is not accessible."
+			throw "The store path '$($this.Path)' does not exist or is not accessible."
 		}
 	}
 }

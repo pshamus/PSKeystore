@@ -1,28 +1,28 @@
-function Remove-Keystore {
+function Remove-KeystoreStore {
 	#.ExternalHelp Keystore.psm1-Help.xml
 	[CmdletBinding(SupportsShouldProcess)]
 	param (
 		[Parameter(Mandatory, ValueFromPipeline)]
-		[Keystore]$InputObject
+		[KeystoreStore]$Store
 	)
 
 	process {
 		try {
 			$ErrorActionPreference = 'Stop'
 
-			$keystoreName = $InputObject.Name
-			@('CurrentDirectory', 'Self') | ForEach-Object {
+			$keystoreName = $Store.Name
+			@('CurrentDirectory', 'Self').ForEach({
 				if ($keystoreName -eq $_) {
-					throw "The access group '$_' is built-in and cannot be altered."
+					throw "The store '$_' is built-in and cannot be altered."
 				}
-			}
+			})
 
-			$target = "Keystore '$keystoreName' ($($InputObject.Path))"
+			$target = "Keystore '$keystoreName' ($($Store.Path))"
 			if ($PSCmdlet.ShouldProcess($target, 'Remove')) {
 				$Settings = Get-KeystoreConfiguration
-				$Settings.Keystores.Remove($keystoreName)
-				if ($InputObject.IsDefault) {
-					$Settings.DefaultKeystore = 'Self'
+				$Settings.Stores.Remove($keystoreName)
+				if ($Store.IsDefault) {
+					$Settings.DefaultStore = 'Self'
 				}
 				$Settings | Export-Configuration
 			}

@@ -5,7 +5,7 @@ function Initialize-Keystore {
 	try {
 		$ErrorActionPreference = 'Stop'
 
-		CreateKeystoreIndividualCertificate
+		$null = CreateKeystoreIndividualCertificate
 
 		# Create the Self keystore if it doesn't exist.
 		if (!(Test-Path -Path $Script:SelfKeystorePath -PathType Container)) {

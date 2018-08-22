@@ -5,11 +5,7 @@ function Get-KeystoreAccessGroup {
 	param (
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
-		[string]$Name,
-
-		[Parameter()]
-		[ValidateNotNullOrEmpty()]
-		[KeystoreSettingScope]$Scope
+		[string]$Name
 	)
 
 	Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState

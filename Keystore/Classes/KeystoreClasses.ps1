@@ -70,7 +70,8 @@ class KeystoreAccessGroup {
 	[string]ProtectString([securestring]$value) {
 		$this.ValidateCertificate()
 		Write-Verbose "Encrypting secret value with access group '$($this.Name) ($($this.CertificateThumbprint))'"
-		$secretValueText = Unprotect-SecureString -SecureString $value
+		$credential = New-Object System.Management.Automation.PSCredential -ArgumentList @('N/A', $value)
+		$secretValueText = $credential.GetNetworkCredential().Password
 		$protectedMessage = Protect-CmsMessage -To $this.CertificateThumbprint -Content $secretValueText
 		return [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($protectedMessage))
 	}

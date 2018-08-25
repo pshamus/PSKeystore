@@ -25,6 +25,10 @@ The **New-KeystoreAccessGroup** function creates a new access group.
 ### Example 1
 ```powershell
 PS C:\> New-KeystoreAccessGroup -Name 'Shared' -CertificateThumbprint 92B8E1A4169853B165F1B0E8F647075A678175F3
+
+Name   CertificateThumbprint                      Type IsDefault
+----   ---------------------                      ---- ---------
+Shared 92B8E1A4169853B165F1B0E8F647075A678175F3 Custom     False
 ```
 
 This command creates a new access group using the specified name and certificate thumbprint.

@@ -1,16 +1,12 @@
 function Set-KeystoreAccessGroup {
 	#.ExternalHelp Keystore.psm1-Help.xml
-	[CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'ByName')]
+	[CmdletBinding(SupportsShouldProcess)]
 	[OutputType([KeystoreAccessGroup])]
 	param (
-		[Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'ByName')]
-		[ValidateNotNullOrEmpty()]
-		[string]$Name,
+		[Parameter(Mandatory, ValueFromPipeline)]
+		[KeystoreAccessGroup]$AccessGroup,
 
-		[Parameter(Mandatory, ValueFromPipeline, ParameterSetName = 'ByObject')]
-		[KeystoreAccessGroup]$InputObject,
-
-		[Parameter()]
+		[Parameter(Mandatory)]
 		[ValidateNotNullOrEmpty()]
 		[string]$CertificateThumbprint,
 
@@ -21,55 +17,26 @@ function Set-KeystoreAccessGroup {
 	begin {
 		Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState
 		$ErrorActionPreference = 'Stop'
+
+		$Script:Settings = Import-Configuration
 	}
 
 	process {
 		try {
-			if ($PSCmdlet.ParameterSetName -eq 'ByObject') {
-				$accessGroup = $InputObject
-				$accessGroup.CertificateThumbprint = $CertificateThumbprint
-				$Name = $accessGroup.Name
+			$accessGroupName = $AccessGroup.Name
+			if ($accessGroupName -eq 'Self') {
+				throw "The access group 'Self' is built-in and cannot be altered."
 			}
+			$AccessGroup.CertificateThumbprint = $CertificateThumbprint.ToUpper()
 
-			if ($PSBoundParameters.ContainsKey('CertificateThumbprint')) {
-				if ($Name -eq 'Self') {
-					throw "The access group 'Self' is built-in and cannot be altered."
+			$target = "Keystore access group '$accessGroupName' ($($AccessGroup.CertificateThumbprint))"
+			if ($PSCmdlet.ShouldProcess($target, 'Set')) {
+				$AccessGroup.ValidateCertificate()
+				$Script:Settings.AccessGroups[$accessGroupName] = $AccessGroup.CertificateThumbprint
+				$Script:Settings | Export-Configuration
+				if ($PassThru.IsPresent) {
+					$AccessGroup
 				}
-			}
-
-			$newItem = $false
-			if ($PSCmdlet.ParameterSetName -eq 'ByName') {
-				if ($null -eq ($accessGroup = Get-KeystoreAccessGroup -Name $Name)) {
-					$newItem = $true
-					if (!$PSBoundParameters.ContainsKey('CertificateThumbprint')) {
-						throw 'A certificate thumbprint is required when creating a new keystore access group.'
-					}
-					$accessGroup = [KeystoreAccessGroup]::new($Name, $CertificateThumbprint, 'Custom', $false)
-				}
-			}
-
-			$updateNeeded = $false
-			if ($newItem -eq $false) {
-				if ($PSBoundParameters.ContainsKey('CertificateThumbprint')) {
-					$updateNeeded = $true
-					$accessGroup.CertificateThumbprint = $CertificateThumbprint
-				}
-			}
-
-			if ($newItem -or $updateNeeded) {
-				$accessGroup.ValidateCertificate()
-				$target = "Keystore access group '$Name' ($($accessGroup.CertificateThumbprint))"
-				if ($PSCmdlet.ShouldProcess($target, 'Set')) {
-					if ($accessGroup.Type -ne 'BuiltIn' -and $PSBoundParameters.ContainsKey('CertificateThumbprint')) {
-						$Script:Settings.AccessGroups[$Name] = $CertificateThumbprint
-					}
-					$Script:Settings | Export-Configuration
-					if ($PassThru.IsPresent) {
-						$accessGroup
-					}
-				}
-			} else {
-				Write-Verbose 'No parameters were specified that required updating'
 			}
 		} catch {
 			$PSCmdlet.ThrowTerminatingError($_)

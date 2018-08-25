@@ -12,7 +12,7 @@ Keystore secrets are encrypted using a certificate with Document Encryption exte
 
 Once a certificate available, it can be added as an Access Group:
 
-`Set-KeystoreAccessGroup -Name 'foo' -CertificateThumbprint 92B8E1A4169853B165F1B0E8F647075A678175F3`
+`New-KeystoreAccessGroup -Name 'foo' -CertificateThumbprint 92B8E1A4169853B165F1B0E8F647075A678175F3`
 
 You can list the existing Access Groups with `Get-KeystoreAccessGroup`:
 

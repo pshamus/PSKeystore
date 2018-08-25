@@ -19,7 +19,7 @@ function Remove-KeystoreStore {
 
 			$target = "Keystore '$keystoreName' ($($Store.Path))"
 			if ($PSCmdlet.ShouldProcess($target, 'Remove')) {
-				$Settings = Get-KeystoreConfiguration
+				$Settings = Import-Configuration
 				$Settings.Stores.Remove($keystoreName)
 				if ($Store.IsDefault) {
 					$Settings.DefaultStore = 'Self'

@@ -11,7 +11,7 @@ function Get-KeystoreStore {
 	Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState
 
 	try {
-		$Script:Settings = Get-KeystoreConfiguration
+		$Script:Settings = Import-Configuration
 
 		$stores = New-Object -TypeName 'System.Collections.ArrayList'
 		$storeArgs = @('CurrentDirectory', (Get-Location).Path, 'BuiltIn', ($Script:Settings.DefaultStore -eq 'CurrentDirectory'))

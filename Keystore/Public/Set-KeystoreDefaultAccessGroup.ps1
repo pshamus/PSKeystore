@@ -30,7 +30,7 @@ function Set-KeystoreDefaultAccessGroup {
 			} else {
 				$target = "Keystore access group '$($AccessGroup.Name)' ($($AccessGroup.CertificateThumbprint))"
 				if ($PSCmdlet.ShouldProcess($target, 'Set as default')) {
-					$Script:Settings = Get-KeystoreConfiguration
+					$Script:Settings = Import-Configuration
 					$Script:Settings.DefaultAccessGroup = $AccessGroup.Name
 					$Script:Settings | Export-Configuration
 				}

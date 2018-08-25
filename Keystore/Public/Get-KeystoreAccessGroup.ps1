@@ -13,7 +13,7 @@ function Get-KeystoreAccessGroup {
 	try {
 		$ErrorActionPreference = 'Stop'
 
-		$Script:Settings = Get-KeystoreConfiguration
+		$Script:Settings = Import-Configuration
 
 		$accessGroups = New-Object 'System.Collections.ArrayList'
 		if ($null -ne ($selfCert = GetKeystoreIndividualCertificate)) {

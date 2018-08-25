@@ -30,7 +30,7 @@ function Set-KeystoreDefaultStore {
 			} else {
 				$target = "Keystore store '$($Store.Name)' ($($Store.Path))"
 				if ($PSCmdlet.ShouldProcess($target, 'Set as default')) {
-					$Script:Settings = Get-KeystoreConfiguration
+					$Script:Settings = Import-Configuration
 					$Script:Settings.DefaultStore = $Store.Name
 					$Script:Settings | Export-Configuration
 				}

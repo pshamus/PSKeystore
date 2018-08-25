@@ -17,7 +17,7 @@ function Remove-KeystoreAccessGroup {
 
 			$target = "Keystore access group '$accessGroupName'"
 			if ($PSCmdlet.ShouldProcess($target, 'Remove')) {
-				$Settings = Get-KeystoreConfiguration
+				$Settings = Import-Configuration
 				$Settings.AccessGroups.Remove($accessGroupName)
 				if ($AccessGroup.IsDefault) {
 					Write-Verbose "Resetting default access group to 'Self'"

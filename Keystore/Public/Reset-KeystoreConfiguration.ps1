@@ -14,7 +14,7 @@ function Reset-KeystoreConfiguration {
 				Get-ChildItem -Path $Script:ConfigurationPath -Filter 'Configuration.psd1' | Remove-Item -Confirm:$false
 
 				Write-Verbose 'Applying keystore default configuration values'
-				Get-KeystoreConfiguration | Export-Configuration
+				Import-Configuration | Export-Configuration
 			}
 		} else {
 			Write-Verbose 'Keystore configuration already uses the default values'

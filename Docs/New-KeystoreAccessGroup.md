@@ -114,6 +114,10 @@ For more information, see about_CommonParameters (http://go.microsoft.com/fwlink
 
 [Get-KeystoreAccessGroup](./Get-KeystoreAccessGroup.md)
 
+[Get-KeystoreDefaultAccessGroup](./Get-KeystoreDefaultAccessGroup.md)
+
 [Remove-KeystoreAccessGroup](./Remove-KeystoreAccessGroup.md)
 
 [Set-KeystoreAccessGroup](./Set-KeystoreAccessGroup.md)
+
+[Set-KeystoreDefaultAccessGroup](./Set-KeystoreDefaultAccessGroup.md)

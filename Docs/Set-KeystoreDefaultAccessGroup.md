@@ -5,29 +5,34 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-KeystoreAccessGroup
+# Set-KeystoreDefaultAccessGroup
 
 ## SYNOPSIS
-Modifies an access group.
+Sets the default access group.
 
 ## SYNTAX
 
+### ByName (Default)
 ```
-Set-KeystoreAccessGroup [-AccessGroup] <KeystoreAccessGroup> [-CertificateThumbprint] <String> [-PassThru]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Set-KeystoreDefaultAccessGroup -Name <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### ByObject
+```
+Set-KeystoreDefaultAccessGroup -AccessGroup <KeystoreAccessGroup> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The **Set-KeystoreAccessGroup** function modifies an existing access group.
+The **Set-KeystoreDefaultAccessGroup** function marks an access group as the default, making it simpler to create Keystore items.
 
 ## EXAMPLES
 
-### Example 1 Modify certificate thumbprint
+### Example 1 Set default access group by pipeline
 ```powershell
-PS C:\> Get-KeystoreAccessGroup -Name Shared | Set-KeystoreAccessGroup -CertificateThumbprint 26B2A36D6BFB71B88503C5F78BEC25985DDB9702
+PS C:\> Get-KeystoreAccessGroup -Name Shared | Set-KeystoreDefaultAccessGroup
 ```
 
-This command sets the certificate thumbprint for the specified access group.
+This command gets the specified access group and passes it to the function via the pipeline, making it the default.
 
 ## PARAMETERS
 
@@ -36,29 +41,13 @@ Specifies a **KeystoreAccessGroup** object.
 
 ```yaml
 Type: KeystoreAccessGroup
-Parameter Sets: (All)
+Parameter Sets: ByObject
 Aliases:
 
 Required: True
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -CertificateThumbprint
-Specifies the thumbprint of the certificate. The certificate must have the Document Encryption enhanced key usage (OID 1.3.6.1.4.1.311.80.1).
-
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -77,15 +66,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -PassThru
-Returns an object representing the item with which you are working. By default, this function does not generate any output.
+### -Name
+Specifies the name of an access group.
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
+Type: String
+Parameter Sets: ByName
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -113,13 +102,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-
 ### KeystoreAccessGroup
 
 ## OUTPUTS
 
-### KeystoreAccessGroup
+### None
 
 ## NOTES
 
@@ -133,4 +120,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 [Remove-KeystoreAccessGroup](./Remove-KeystoreAccessGroup.md)
 
-[Set-KeystoreDefaultAccessGroup](./Set-KeystoreDefaultAccessGroup.md)
+[Set-KeystoreAccessGroup](./Set-KeystoreAccessGroup.md)

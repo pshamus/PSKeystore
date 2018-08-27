@@ -93,6 +93,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 [Get-KeystoreAccessGroup](./Get-KeystoreAccessGroup.md)
 
+[Get-KeystoreDefaultAccessGroup](./Get-KeystoreDefaultAccessGroup.md)
+
 [New-KeystoreAccessGroup](./New-KeystoreAccessGroup.md)
 
 [Set-KeystoreAccessGroup](./Set-KeystoreAccessGroup.md)
+
+[Set-KeystoreDefaultAccessGroup](./Set-KeystoreDefaultAccessGroup.md)

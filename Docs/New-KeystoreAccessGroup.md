@@ -18,7 +18,7 @@ New-KeystoreAccessGroup [-Name] <String> [-CertificateThumbprint] <String> [-Wha
 ```
 
 ## DESCRIPTION
-The **New-KeystoreAccessGroup** function creates a new access group.
+The **New-KeystoreAccessGroup** function creates a new access group. Access groups are certificate thumbprints that have been given friendly names so they can be more easily referenced.
 
 ## EXAMPLES
 
@@ -97,8 +97,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

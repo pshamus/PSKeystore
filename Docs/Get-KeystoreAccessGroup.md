@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-KeystoreAccessGroup
 
 ## SYNOPSIS
-Gets a access group.
+Gets an access group.
 
 ## SYNTAX
 

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-KeystoreDefaultAccessGroup
 
 ## SYNOPSIS
-Gets the default Keystore access group.
+Gets the default access group.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-KeystoreDefaultAccessGroup [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The Get-KeystoreDefaultAccessGroup function gets the default Keystore access group. Only one access group can be set as default.
+The **Get-KeystoreDefaultAccessGroup** function gets the default Keystore access group. Only one access group can be set as default.
 
 ## EXAMPLES
 

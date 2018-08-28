@@ -1,8 +1,11 @@
-# Keystore
-A simple, file-based secret/credential storage solution to assist with automation when using PowerShell scripts/modules.
+# Introduction
+Keystore is a simple, file-based secret/credential storage solution to assist with automation when using PowerShell scripts/modules.
+
+## Requirements
+- Windows PowerShell 5.0 or later. PowerShell Core is not supported at this time.
 
 ## Dependencies
-The Keystore module is dependent on the [Configuration module by Joel Bennett](https://github.com/PoshCode/Configuration). It can be installed from the PowerShell Gallery by running `Install-Module -Name Configuration -RequiredVersion 1.3.0 -Force`.
+- [Configuration](https://github.com/PoshCode/Configuration) module by Joel Bennett. It can be installed from the PowerShell Gallery by running `Install-Module -Name Configuration -RequiredVersion 1.3.0 -Force`.
 
 # Getting Started
 The basic components of the Keystore module are Access Groups, Stores, and Items.
@@ -31,7 +34,7 @@ A Keystore store is a pre-defined location (path) with a friendly name. This all
 
 Stores can be created like this:
 
-`Set-KeystoreStore -Name 'foo' -Path 'C:\keystore'`
+`New-KeystoreStore -Name 'foo' -Path 'C:\keystore'`
 
 You can list the available stores with `Get-KeystoreStore`:
 

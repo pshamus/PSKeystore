@@ -8,20 +8,23 @@ schema: 2.0.0
 # Get-KeystoreAccessGroup
 
 ## SYNOPSIS
+
 Gets an access group.
 
 ## SYNTAX
 
-```
+```powershell
 Get-KeystoreAccessGroup [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 The **Get-KeystoreAccessGroup** function gets one or more access groups. Access groups are certificate thumbprints that have been given friendly names so they can be more easily referenced.
 
 ## EXAMPLES
 
 ### Example 1 Get all available access groups
+
 ```powershell
 PS C:\> Get-KeystoreAccessGroup
 
@@ -34,6 +37,7 @@ Shared 92B8E1A4169853B165F1B0E8F647075A678175F3  Custom     False
 This command gets all available access groups.
 
 ### Example 2 Get an access group by name
+
 ```powershell
 PS C:\> Get-KeystoreAccessGroup -Name Shared
 
@@ -47,6 +51,7 @@ This command gets the access group with the specified name.
 ## PARAMETERS
 
 ### -Name
+
 Specifies the name of the access group.
 
 ```yaml
@@ -62,6 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS

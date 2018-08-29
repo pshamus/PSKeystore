@@ -3,6 +3,7 @@ param ()
 
 task InitializeBuildEnvironment {
 	Set-BuildEnvironment -Force
+	Get-BuildEnvironment
 }
 
 task CleanBuildOutputFolder {

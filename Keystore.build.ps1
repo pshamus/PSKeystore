@@ -18,10 +18,10 @@ task StageModuleFiles {
 	Copy-Item -Path $Env:BHModulePath -Destination $Env:BHBuildOutput -Recurse -Force
 }
 
-task UpdateModuleVersion -if { $null -ne $Env:APPVEYOR_REPO_TAG_NAME } {
-	Write-Verbose "Updating module version to $Env:APPVEYOR_REPO_TAG_NAME" -Verbose
+task UpdateModuleVersion -if { $null -ne $Env:APPVEYOR_BUILD_VERSION } {
+	Write-Verbose "Updating module version to $Env:APPVEYOR_BUILD_VERSION" -Verbose
 	$manifest = Get-Content -Path $moduleOutputManifest -Raw
-	$manifest = $manifest -replace "'0.0.1'", "'$($Env:APPVEYOR_REPO_TAG_NAME)'"
+	$manifest = $manifest -replace "'0.0.1'", "'$($Env:APPVEYOR_BUILD_VERSION)'"
 	Set-Content -Path $moduleOutputManifest -Value $manifest -Encoding Ascii
 }
 

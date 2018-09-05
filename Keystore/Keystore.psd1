@@ -1,14 +1,3 @@
-<#
-	===========================================================================
-	Organization:	Dusk Consulting
-	Filename:		Keystore.psd1
-	-------------------------------------------------------------------------
-	Module Manifest
-	-------------------------------------------------------------------------
-	Module Name:	Keystore
-	===========================================================================
-#>
-
 @{
 	RootModule        = 'Keystore.psm1'
 	ModuleVersion     = '0.0.1'
@@ -16,25 +5,24 @@
 	Author            = 'Paul Shamus'
 	CompanyName       = 'Dusk Consulting'
 	Copyright         = '(c) Dusk Consulting. All rights reserved.'
+	Description       = 'A simple, file-based secret/credential storage solution to assist in the automation of PowerShell scripts/modules'
 	PowerShellVersion = '5.0'
 	CLRVersion        = '4.0'
 	RequiredModules   = @(
 		@{ ModuleName = 'Configuration'; ModuleVersion = '1.3.0' }
 	)
-	FormatsToProcess  = @('Keystore.Format.ps1xml')
 	ScriptsToProcess  = @('.\Classes\KeystoreClasses.ps1')
+	FormatsToProcess  = @('Keystore.Format.ps1xml')
 	FunctionsToExport = @('*')
-	FileList          = @()
 	PrivateData       = @{
 		PSData = @{
-			Category                 = 'Automation'
-			Tags                     = @('PowerShell')
-			IconUri                  = ''
-			ProjectUri               = 'https://github.com/pshamus/keystore'
-			LicenseUri               = ''
-			ReleaseNotes             = ''
-			RequireLicenseAcceptance = ''
-			Prerelease               = 'false'
+			Tags                       = @('Certificates', 'Security', 'Credentials')
+			IconUri                    = ''
+			ProjectUri                 = 'https://github.com/pshamus/keystore'
+			LicenseUri                 = ''
+			ReleaseNotes               = ''
+			RequireLicenseAcceptance   = ''
+			Prerelease                 = 'true'
 		}
 	}
 }

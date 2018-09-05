@@ -1,12 +1,3 @@
-<#
-	===========================================================================
-	Organization:	Dusk Consulting
-	Filename:		Keystore.psm1
-	-------------------------------------------------------------------------
-	Module Name:	Keystore
-	===========================================================================
-#>
-
 Set-StrictMode -Version Latest
 
 $Script:ConfigurationPath = Get-ConfigurationPath

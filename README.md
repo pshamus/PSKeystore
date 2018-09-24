@@ -1,5 +1,5 @@
 # Introduction
-Keystore is a simple, file-based secret/credential storage solution to assist with automation when using PowerShell scripts/modules.
+PSKeystore is a simple, file-based secret/credential storage solution to assist with automation when using PowerShell scripts/modules.
 
 ## Requirements
 - Windows PowerShell 5.0 or later. PowerShell Core is not supported at this time.
@@ -8,7 +8,7 @@ Keystore is a simple, file-based secret/credential storage solution to assist wi
 - [Configuration](https://github.com/PoshCode/Configuration) module by Joel Bennett. It can be installed from the PowerShell Gallery by running `Install-Module -Name Configuration -RequiredVersion 1.3.0 -Force`.
 
 # Getting Started
-The basic components of the Keystore module are Access Groups, Stores, and Items.
+The basic components of the PSKeystore module are Access Groups, Stores, and Items.
 
 ## Access Groups
 Keystore secrets are encrypted using a certificate with Document Encryption extended key usage attribute. The thumbprint of the certificate is referenced when performing the encryption. To make this easier to use, you can use an Access Group, which is an association of a certificate thumbprint to a friendly name.

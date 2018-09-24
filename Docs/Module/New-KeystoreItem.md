@@ -1,5 +1,5 @@
 ---
-external help file: Keystore-help.xml
+external help file: PSKeystore-help.xml
 Module Name: Keystore
 online version:
 schema: 2.0.0

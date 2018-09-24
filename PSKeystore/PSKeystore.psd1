@@ -1,5 +1,5 @@
 @{
-	RootModule        = 'Keystore.psm1'
+	RootModule        = 'PSKeystore.psm1'
 	ModuleVersion     = '0.0.1'
 	GUID              = 'db8cdab0-3635-4a04-bd5d-e8439e34c153'
 	Author            = 'Paul Shamus'
@@ -12,13 +12,13 @@
 		@{ ModuleName = 'Configuration'; ModuleVersion = '1.3.0' }
 	)
 	ScriptsToProcess  = @('.\Classes\KeystoreClasses.ps1')
-	FormatsToProcess  = @('Keystore.Format.ps1xml')
+	FormatsToProcess  = @('PSKeystore.Format.ps1xml')
 	FunctionsToExport = @('*')
 	PrivateData       = @{
 		PSData = @{
 			Tags                       = @('Certificates', 'Security', 'Credentials')
 			IconUri                    = ''
-			ProjectUri                 = 'https://github.com/pshamus/keystore'
+			ProjectUri                 = 'https://github.com/pshamus/PSKeystore'
 			LicenseUri                 = ''
 			ReleaseNotes               = ''
 			RequireLicenseAcceptance   = ''
